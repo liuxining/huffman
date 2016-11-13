@@ -171,7 +171,7 @@ int bianMa(HuffmanCode HC, char *ziFu,string yuanMa,string &result)
 	return 1;
 }
 //ÒëÂë£¬ÀûÓÃ¹ş·òÂüÊ÷¶ÔÃÜÂëÒëÂë
-int yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
+void yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 {
 	result.clear();
 	int i;
