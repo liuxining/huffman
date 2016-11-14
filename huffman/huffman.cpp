@@ -171,20 +171,13 @@ int bianMa(HuffmanCode HC, char *ziFu,string yuanMa,string &result)
 	return 1;
 }
 //译码，利用哈夫曼树对密码译码
-int yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
+int yiMa(HuffmanTree HT,int n,char *ziFu, string yuanMa, string &result)
 {
 	result.clear();
 	int i;
-	int len = miMa.length();
+	int len = yuanMa.length();
 	int root;
-	//找哈夫曼的根节点的下标
-	/*for (i = n + 1; i <= 2 * n - 1; i++)
-	{
-		if (HT[i].parent == 0)
-		{
-			root = i;
-		}
-	}*/
+
 	root = 2 * n - 1;
 	i = 0;
 	int p = root;
@@ -199,10 +192,13 @@ int yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 			return 0;
 		if (i >= len)
 			break;
-		if (miMa[i++] == '0')
+		if (yuanMa[i] == '0')
 			p = HT[p].lchild;
-		else
+		else if (yuanMa[i] == '1')
 			p = HT[p].rchild;
+		else
+			return 0;
+		i++;
 	}
 	return 1;
 }
@@ -248,6 +244,7 @@ void main()
 			cout << "请输入 " << n << " 个字符和其对应的权值：" << endl;
 			for (int i = 1; i <= n; i++)
 				cin >> ziFu[i] >> weight[i];
+
 
 			//构建哈夫曼树
 			createHuffmanTree(HT, n, weight);
