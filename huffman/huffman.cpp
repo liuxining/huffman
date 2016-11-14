@@ -171,7 +171,7 @@ int bianMa(HuffmanCode HC, char *ziFu,string yuanMa,string &result)
 	return 1;
 }
 //译码，利用哈夫曼树对密码译码
-void yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
+int yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 {
 	result.clear();
 	int i;
@@ -191,9 +191,11 @@ void yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 	{
 		if (HT[p].lchild == 0 && HT[p].rchild == 0)
 		{
-			result.append(1,ziFu[p]);
+			result.append(1, ziFu[p]);
 			p = root;
 		}
+		else if (i == len)
+			return 0;
 		if (i >= len)
 			break;
 		if (miMa[i++] == '0')
@@ -201,6 +203,7 @@ void yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 		else
 			p = HT[p].rchild;
 	}
+	return 1;
 }
 
 void main()
@@ -285,7 +288,8 @@ void main()
 			if (HC)
 			{
 				int a;
-				cout << "1、使用6的译码结果进行编码\t2、手动输入需要编码的字符串：";
+				cout << "1、使用6的译码结果进行编码\t2、手动输入需要编码的字符串：" <<endl;
+				cout << "请选择：";
 				cin >> a;
 				if (a == 1)
 					if (yiMa_result != "N")
@@ -319,7 +323,8 @@ void main()
 			if (HT)
 			{
 				int a;
-				cout << "1、使用5的编码字符串结果进行译码\t2、自己输入编码字符串:";
+				cout << "1、使用5的编码字符串结果进行译码\t2、自己输入编码字符串:" <<endl;
+				cout << "请选择：";
 				cin >> a;
 				if (a == 1)
 					if(bianMa_result != "N")
@@ -330,14 +335,19 @@ void main()
 						break;
 					}
 				else if (a == 2)
+				{
+					cout << "请输入要译码的编码字符串：";
 					cin >> yiMaYuan;
+				}
 				else
 				{
 					cout << "输入错误" << endl;
 					break;
 				}
-				yiMa(HT, n, ziFu, yiMaYuan, yiMa_result);
-				cout << yiMaYuan << "对应的原字符串为 ： " << yiMa_result << endl;
+				if (yiMa(HT, n, ziFu, yiMaYuan, yiMa_result) == 1)
+					cout << yiMaYuan << "对应的原字符串为 ： " << yiMa_result << endl;
+				else
+					cout << "编码字符串有错！" << endl;
 				break;
 			}
 			else
