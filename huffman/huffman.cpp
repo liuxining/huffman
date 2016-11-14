@@ -178,13 +178,14 @@ int yiMa(HuffmanTree HT,int n,char *ziFu, string miMa, string &result)
 	int len = miMa.length();
 	int root;
 	//找哈夫曼的根节点的下标
-	for (i = n + 1; i <= 2 * n - 1; i++)
+	/*for (i = n + 1; i <= 2 * n - 1; i++)
 	{
 		if (HT[i].parent == 0)
 		{
 			root = i;
 		}
-	}
+	}*/
+	root = 2 * n - 1;
 	i = 0;
 	int p = root;
 	while (true)
